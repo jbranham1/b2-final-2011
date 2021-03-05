@@ -58,7 +58,7 @@ RSpec.describe 'Flight Show Page' do
       it "And I see the average age of all adult passengers on the flight" do
         visit flight_path(@flight1)
         within('.average-age') do
-          expect(page).to have_content("Average Age of Adult Passengers: #{@flight1.average_age_of_adult_passengers}")
+          expect(page).to have_content("Average Age of Adult Passengers: 29.5")
         end
       end
       describe "Next to each passengers name I see a button to remove that passenger from that flight" do
@@ -75,6 +75,7 @@ RSpec.describe 'Flight Show Page' do
             expect(page).to have_content(@passenger2.name)
             expect(page).to_not have_content(@passenger4.name)
             expect(page).to_not have_content(@passenger3.name)
+            expect(page).to have_content("Average Age of Adult Passengers: 33")
           end
         end
       end
