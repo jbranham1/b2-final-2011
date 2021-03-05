@@ -21,13 +21,13 @@ RSpec.describe 'Flight Index Page' do
 
         expect(current_path).to eq ("/flights")
 
-        within ".flight-##{@flight1.id}" do
+        within ".flight-#{@flight1.id}" do
           expect(page).to have_content(@flight1.flight_number)
           expect(page).to have_content(@flight1.departure_city)
           expect(page).to have_content(@flight1.arrival_city)
           expect(page).to_not have_content(@flight2.flight_number)
         end
-        within ".flight-##{@flight2.id}" do
+        within ".flight-#{@flight2.id}" do
           expect(page).to have_content(@flight2.flight_number)
           expect(page).to have_content(@flight2.departure_city)
           expect(page).to have_content(@flight2.arrival_city)
