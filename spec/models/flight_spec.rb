@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Flight, type: :model do
   before :each do
+    FlightPassenger.destroy_all
+    Flight.destroy_all
+    Passenger.destroy_all
     @flight1 = Flight.create(flight_number: '1727',
                             date: "08/03/20",
                             time: "08/03/20",
