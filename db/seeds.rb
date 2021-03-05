@@ -10,7 +10,12 @@ Passenger.destroy_all
                         date: DateTime.new(2021, 8, 23),
                         time: DateTime.new(2021, 8, 23,10),
                         departure_city: "Little Rock",
-                        arrival_city: "Denver")
+                        arrival_city: "Dallas")
+@flight3= Flight.create(flight_number: '1729',
+                        date: DateTime.new(2021, 8, 23),
+                        time: DateTime.new(2021, 8, 23,12),
+                        departure_city: "Dallas",
+                        arrival_city: "Miami")
 @passenger1 = Passenger.create(name: 'Jenny', age: 26)
 @passenger2 = Passenger.create(name: 'Kyle', age: 33)
 @passenger3 = Passenger.create(name: 'Angel', age: 24)
@@ -19,3 +24,4 @@ Passenger.destroy_all
 @flight_passenger2 = FlightPassenger.create(flight_id: @flight1.id, passenger_id: @passenger2.id)
 @flight_passenger3 = FlightPassenger.create(flight_id: @flight2.id, passenger_id: @passenger3.id)
 @flight_passenger4 = FlightPassenger.create(flight_id: @flight1.id, passenger_id: @passenger4.id)
+@flight_passenger5 = FlightPassenger.create(flight_id: @flight3.id, passenger_id: @passenger3.id)

@@ -14,7 +14,12 @@ RSpec.describe Flight, type: :model do
                             date: DateTime.new(2021, 8, 23),
                             time: DateTime.new(2021, 8, 23,10),
                             departure_city: "Little Rock",
-                            arrival_city: "Denver")
+                            arrival_city: "Dallas")
+    @flight3= Flight.create(flight_number: '1729',
+                            date: DateTime.new(2021, 8, 23),
+                            time: DateTime.new(2021, 8, 23,12),
+                            departure_city: "Dallas",
+                            arrival_city: "Miami")
     @passenger1 = Passenger.create(name: 'Jenny', age: 26)
     @passenger2 = Passenger.create(name: 'Kyle', age: 33)
     @passenger3 = Passenger.create(name: 'Angel', age: 24)
@@ -23,6 +28,7 @@ RSpec.describe Flight, type: :model do
     @flight_passenger2 = FlightPassenger.create(flight_id: @flight1.id, passenger_id: @passenger2.id)
     @flight_passenger3 = FlightPassenger.create(flight_id: @flight2.id, passenger_id: @passenger3.id)
     @flight_passenger4 = FlightPassenger.create(flight_id: @flight1.id, passenger_id: @passenger4.id)
+    @flight_passenger5 = FlightPassenger.create(flight_id: @flight3.id, passenger_id: @passenger3.id)
   end
 
   describe 'relationships' do
@@ -34,17 +40,27 @@ RSpec.describe Flight, type: :model do
     it { should validate_presence_of :flight_number }
   end
 
-  describe 'instance methods' do
-    describe '::order_by_departure_city' do
-      it "orders flights by departure city alphabetically (a-z)" do
-        expect(Flight.order_by_departure_city.pluck(:departure_city)).to eq([@flight2.departure_city, @flight1.departure_city])
+  describe 'class methods' do
+    # describe '::order_by_departure_city' do
+    #   it "orders flights by departure city alphabetically (a-z)" do
+    #     expect(Flight.order_by_departure_city.pluck(:departure_city)).to eq([@flight2.departure_city, @flight1.departure_city])
+    #   end
+    # end
+    describe '::order_by_passenger_count_departure_city' do
+      it "orders flights by passenger count largest to smallest, then departure city (a-z)" do
+        expect(Flight.order_by_passenger_count_departure_city).to eq([@flight1, @flight3, @flight2])
       end
     end
   end
-  describe 'class methods' do
-    describe '::average_age_of_adult_passengers' do
+  describe 'instance methods' do
+    describe '#average_age_of_adult_passengers' do
       it "gets the average age of all adult passengers on the flight" do
         expect(@flight1.average_age_of_adult_passengers).to eq(29.5)
+      end
+    end
+    describe '#passenger_count' do
+      it "gets the amount of passengers" do
+        expect(@flight1.passenger_count).to eq(3)
       end
     end
   end
