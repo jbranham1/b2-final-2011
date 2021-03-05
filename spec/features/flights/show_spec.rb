@@ -42,13 +42,17 @@ RSpec.describe 'Flight Show Page' do
           expect(page).to_not have_content(@flight2.time)
           expect(page).to_not have_content(@flight2.departure_city)
       end
-      it "And I see the names of all adult passengers on the flight" do
+      it "And I see the names of all adult passengers on the flight with their age" do
         visit flight_path(@flight1)
-        within('.flight-passengers') do
+        within('.flight-adult-passengers') do
           expect(page).to have_content(@passenger1.name)
+          expect(page).to have_content(@passenger1.age)
           expect(page).to have_content(@passenger2.name)
-          expect(page).to have_content(@passenger4.name)
+          expect(page).to have_content(@passenger1.age)
+          expect(page).to_not have_content(@passenger4.name)
+          expect(page).to have_content(@passenger1.age)
           expect(page).to_not have_content(@passenger3.name)
+          expect(page).to have_content(@passenger1.age)
         end
       end
       it "And I see the average age of all adult passengers on the flight" do
@@ -69,7 +73,8 @@ RSpec.describe 'Flight Show Page' do
             expect(current_path).to eq(flight_path(@flight1))
             expect(page).to_not have_content(@passenger1.name)
             expect(page).to have_content(@passenger2.name)
-            expect(page).to have_content(@passenger4.name)
+            expect(page).to_not have_content(@passenger4.name)
+            expect(page).to_not have_content(@passenger3.name)
           end
         end
       end

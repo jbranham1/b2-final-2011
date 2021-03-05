@@ -4,11 +4,13 @@
 <p>Departure City: <%= @flight.departure_city %></p>
 <p>Arrival City: <%= @flight.arrival_city %></p>
 
-<div class ='flight-passengers'>
-  <h3>Passengers: </h3>
-  <% @flight.passengers.each do |passenger|  %>
+<div class ='flight-adult-passengers'>
+  <h3>Adult Passengers: </h3>
+  <% @flight.adult_passengers.each do |passenger|  %>
     <section class="passenger-<%= passenger.id %>"
-      <p><%= passenger.name %> <%= button_to 'Remove', flight_passenger_path(@flight, passenger), method: :delete %></p>
+      <p><%= passenger.name %></p>
+      <p>Age: <%= passenger.age %></p>
+      <%= button_to 'Remove', flight_passenger_path(@flight, passenger), method: :delete %></p>
       </section>
   <% end %>
 </div>
