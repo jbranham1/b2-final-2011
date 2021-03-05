@@ -6,13 +6,13 @@ RSpec.describe 'Flight Index Page' do
     Flight.destroy_all
     Passenger.destroy_all
     @flight1 = Flight.create(flight_number: '1727',
-                            date: "08/03/20",
-                            time: "08/03/20",
+                            date: DateTime.new(2021, 8, 23),
+                            time: DateTime.new(2021, 8, 23,8),
                             departure_city: "Denver",
                             arrival_city: "Reno")
     @flight2= Flight.create(flight_number: '1728',
-                            date: "08/03/20",
-                            time: "08/03/20",
+                            date: DateTime.new(2021, 8, 23),
+                            time: DateTime.new(2021, 8, 23,10),
                             departure_city: "Little Rock",
                             arrival_city: "Denver")
   end

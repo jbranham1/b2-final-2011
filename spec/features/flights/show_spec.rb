@@ -6,13 +6,13 @@ RSpec.describe 'Flight Show Page' do
     Flight.destroy_all
     Passenger.destroy_all
     @flight1 = Flight.create(flight_number: '1727',
-                            date: "08/03/20",
-                            time: "08/03/20",
+                            date: DateTime.new(2021, 8, 23),
+                            time: DateTime.new(2021, 8, 23,8),
                             departure_city: "Denver",
                             arrival_city: "Reno")
     @flight2= Flight.create(flight_number: '1728',
-                            date: "08/03/20",
-                            time: "08/03/20",
+                            date: DateTime.new(2021, 8, 23),
+                            time: DateTime.new(2021, 8, 23,10),
                             departure_city: "Little Rock",
                             arrival_city: "Denver")
     @passenger1 = Passenger.create(name: 'Jenny', age: 26)
@@ -39,10 +39,8 @@ RSpec.describe 'Flight Show Page' do
           expect(page).to have_content(@flight1.arrival_city)
 
           expect(page).to_not have_content(@flight2.flight_number)
-          expect(page).to_not have_content(@flight2.date)
           expect(page).to_not have_content(@flight2.time)
           expect(page).to_not have_content(@flight2.departure_city)
-          expect(page).to_not have_content(@flight2.arrival_city)
       end
       it "And I see the names of all adult passengers on the flight" do
         visit flight_path(@flight1)
@@ -55,8 +53,8 @@ RSpec.describe 'Flight Show Page' do
       end
       it "And I see the average age of all adult passengers on the flight" do
         visit flight_path(@flight1)
-        within('.average_age') do
-          expect(page).to have_content("Average Age of Adult Passengers: 28")
+        within('.average-age') do
+          expect(page).to have_content("Average Age of Adult Passengers: #{@flight1.average_age_of_adult_passengers}")
         end
       end
     end
