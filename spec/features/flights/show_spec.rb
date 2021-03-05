@@ -57,6 +57,20 @@ RSpec.describe 'Flight Show Page' do
           expect(page).to have_content("Average Age of Adult Passengers: #{@flight1.average_age_of_adult_passengers}")
         end
       end
+      describe "Next to each passengers name I see a button to remove that passenger from that flight" do
+        describe "When I click on that link or button" do
+          it "I'm returned to the flight's show page and I no longer see that passenger listed" do
+            visit flight_path(@flight1)
+            within(".passenger-#{@passenger1.id}") do
+              expect(page).to have_button("Remove")
+              click_button("Remove")
+            end
+
+            expect(current_path).to eq(flight_path(@flight1))
+            expect(page).to_not have_content(@passenger1.name)
+          end
+        end
+      end
     end
   end
 end
