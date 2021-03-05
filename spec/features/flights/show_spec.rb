@@ -68,6 +68,8 @@ RSpec.describe 'Flight Show Page' do
 
             expect(current_path).to eq(flight_path(@flight1))
             expect(page).to_not have_content(@passenger1.name)
+            expect(page).to have_content(@passenger2.name)
+            expect(page).to have_content(@passenger4.name)
           end
         end
       end

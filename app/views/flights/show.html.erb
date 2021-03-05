@@ -7,7 +7,9 @@
 <div class ='flight-passengers'>
   <h3>Passengers: </h3>
   <% @flight.passengers.each do |passenger|  %>
-    <p><%= passenger.name %></p>
+    <section class="passenger-<%= passenger.id %>"
+      <p><%= passenger.name %> <%= button_to 'Remove', flight_passenger_path(@flight, passenger), method: :delete %></p>
+      </section>
   <% end %>
 </div>
 <div class ='average-age'>
